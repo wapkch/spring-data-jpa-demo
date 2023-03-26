@@ -21,15 +21,17 @@ import org.hibernate.annotations.Where;
 @Entity
 @Where(clause = "is_deleted = 0")
 @DynamicInsert
-public class User extends ChannelBaseEntity {
+public class Channel extends AuditableEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    private String code;
 
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAssignment> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChannelPermission> permissions = new ArrayList<>();
 
 }

@@ -16,19 +16,19 @@ import org.hibernate.annotations.Where;
 @Setter
 @Getter
 @Entity
-@Table(name = "user_role")
+@Table(name = "role_permission")
 @Where(clause = "is_deleted = 0")
 @DynamicUpdate
-public class UserAssignment extends ChannelBaseEntity {
+public class PermissionAssignment extends ChannelBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private User user;
+    private Role role;
 
     @ManyToOne
-    private Role role;
+    private Permission permission;
 
 }

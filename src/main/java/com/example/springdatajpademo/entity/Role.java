@@ -21,7 +21,7 @@ import org.hibernate.annotations.Where;
 @Entity
 @Where(clause = "is_deleted = 0")
 @DynamicInsert
-public class User extends ChannelBaseEntity {
+public class Role extends ChannelBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +29,10 @@ public class User extends ChannelBaseEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAssignment> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserAssignment> users = new ArrayList<>();
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PermissionAssignment> permissions = new ArrayList<>();
 
 }

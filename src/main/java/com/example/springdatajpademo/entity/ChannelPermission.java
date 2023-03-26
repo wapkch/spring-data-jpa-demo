@@ -5,30 +5,28 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.Where;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "user_role")
 @Where(clause = "is_deleted = 0")
-@DynamicUpdate
-public class UserAssignment extends ChannelBaseEntity {
+@DynamicInsert
+public class ChannelPermission extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private User user;
+    private Channel channel;
 
     @ManyToOne
-    private Role role;
+    private Permission permission;
 
 }

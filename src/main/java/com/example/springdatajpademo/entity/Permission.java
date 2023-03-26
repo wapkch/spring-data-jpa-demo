@@ -2,8 +2,6 @@ package com.example.springdatajpademo.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -21,15 +19,15 @@ import org.hibernate.annotations.Where;
 @Entity
 @Where(clause = "is_deleted = 0")
 @DynamicInsert
-public class User extends ChannelBaseEntity {
+public class Permission extends AuditableEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
-    private String name;
+    @OneToMany(mappedBy = "permission", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PermissionAssignment> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<UserAssignment> roles = new ArrayList<>();
+    @OneToMany(mappedBy = "permission", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ChannelPermission> channels = new ArrayList<>();
 
 }

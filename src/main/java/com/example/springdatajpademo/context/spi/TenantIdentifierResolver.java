@@ -1,4 +1,4 @@
-package com.example.springdatajpademo;
+package com.example.springdatajpademo.context.spi;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver
 
     @Override
     public String resolveCurrentTenantIdentifier() {
-        return "tenant";
+        return "channel1";
     }
 
     @Override
@@ -22,7 +22,7 @@ public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver
 
     @Override
     public boolean isRoot(String tenantId) {
-        return CurrentTenantIdentifierResolver.super.isRoot(tenantId);
+        return "root".equals(tenantId);
     }
 
     @Override
